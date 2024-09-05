@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <Container fluid className="me-auto bg-light">
-        <Row className="hero d-flex align-items-center">
+        <Row className="vh-100 d-flex align-items-center">
           <Col className=" d-flex flex-column align-items-center gap-2">
             <h1>😀</h1>
             <h1 className="fw-bold m-0">Happiness Rankings</h1>

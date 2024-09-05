@@ -2,6 +2,8 @@ import { Link, useResolvedPath, useMatch } from "react-router-dom";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import SearchBar from "./Search";
 
+import { useState } from "react";
+
 const HighlightLink = (props) => {
   let resolved = useResolvedPath(props.to);
   let match = useMatch({ path: resolved.pathname, end: true });
@@ -9,33 +11,64 @@ const HighlightLink = (props) => {
 };
 
 export default function Header() {
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <header>
-      <Navbar expand="lg" bg="primary" variant="dark" className="fixed-top ">
+      <Navbar
+        expand="lg"
+        bg="primary"
+        variant="dark"
+        className="fixed-top"
+        expanded={expanded}
+      >
         <Container fluid>
-          <Navbar.Brand to="/" as={Link}>
+          <Navbar.Brand to="/" as={Link} onClick={() => setExpanded(false)}>
             Happiness Data App
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarSupportedContent" />
+          <Navbar.Toggle
+            aria-controls="navbarSupportedContent"
+            onClick={() => setExpanded(!expanded)}
+          />
           <Navbar.Collapse id="navbarSupportedContent">
             <Nav className="me-auto">
-              <HighlightLink to="/" as={Link}>
+              <HighlightLink
+                to="/"
+                as={Link}
+                onClick={() => setExpanded(false)}
+              >
                 Home
               </HighlightLink>
-              <HighlightLink to="/rankings" as={Link}>
+              <HighlightLink
+                to="/rankings"
+                as={Link}
+                onClick={() => setExpanded(false)}
+              >
                 Country Rankings
               </HighlightLink>
-              <HighlightLink to="/factors" as={Link}>
+              <HighlightLink
+                to="/factors"
+                as={Link}
+                onClick={() => setExpanded(false)}
+              >
                 Factors
               </HighlightLink>
-              <HighlightLink to="/login" as={Link}>
+              <HighlightLink
+                to="/login"
+                as={Link}
+                onClick={() => setExpanded(false)}
+              >
                 Login
               </HighlightLink>
-              <HighlightLink to="/register" as={Link}>
+              <HighlightLink
+                to="/register"
+                as={Link}
+                onClick={() => setExpanded(false)}
+              >
                 Register
               </HighlightLink>
             </Nav>
-            <SearchBar />
+            <SearchBar onClick={() => setExpanded(false)} />
           </Navbar.Collapse>
         </Container>
       </Navbar>
