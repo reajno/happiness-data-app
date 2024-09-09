@@ -10,8 +10,13 @@ const HighlightLink = (props) => {
   return <Nav.Link {...props} active={match} />;
 };
 
-export default function Header() {
+export default function Header({ isLoggedIn, setIsLoggedIn }) {
   const [expanded, setExpanded] = useState(false);
+
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+  };
 
   return (
     <header>
@@ -53,20 +58,36 @@ export default function Header() {
               >
                 Factors
               </HighlightLink>
-              <HighlightLink
-                to="/login"
-                as={Link}
-                onClick={() => setExpanded(false)}
-              >
-                Login
-              </HighlightLink>
-              <HighlightLink
-                to="/register"
-                as={Link}
-                onClick={() => setExpanded(false)}
-              >
-                Register
-              </HighlightLink>
+              {!isLoggedIn ? (
+                <HighlightLink
+                  to="/login"
+                  as={Link}
+                  onClick={() => setExpanded(false)}
+                >
+                  Login
+                </HighlightLink>
+              ) : null}
+              {!isLoggedIn ? (
+                <HighlightLink
+                  to="/register"
+                  as={Link}
+                  onClick={() => setExpanded(false)}
+                >
+                  Register
+                </HighlightLink>
+              ) : null}
+              {isLoggedIn ? (
+                <HighlightLink
+                  to="/"
+                  as={Link}
+                  onClick={() => {
+                    setExpanded(false);
+                    handleLogOut();
+                  }}
+                >
+                  Logout
+                </HighlightLink>
+              ) : null}
             </Nav>
             <SearchBar onClick={() => setExpanded(false)} />
           </Navbar.Collapse>

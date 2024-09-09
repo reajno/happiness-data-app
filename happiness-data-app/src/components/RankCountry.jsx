@@ -7,8 +7,9 @@ import "ag-grid-community/styles/ag-theme-quartz.css";
 import useRankings from "../api";
 
 export default function RankCountry() {
-  const { country } = useParams();
-  const { ranks } = useRankings(null, country);
+  const { id } = useParams();
+  const { ranks } = useRankings(null, id);
+  const [country, setCountry] = useState("");
   const [rowData, setRowData] = useState([]);
   const [colDefs, setColDefs] = useState([
     { field: "year" },
@@ -18,6 +19,7 @@ export default function RankCountry() {
   useEffect(() => {
     if (ranks && ranks.length > 0) {
       setRowData(ranks);
+      setCountry(ranks[0].country);
     }
   }, [ranks]);
 
