@@ -7,16 +7,30 @@ import "ag-grid-community/styles/ag-theme-quartz.css";
 import CellRenderer from "../components/CellRenderer";
 import useRankings from "../useRankings";
 
+const yearList = (data) => {
+  const years = data.map((item) => item.year);
+
+  return [...new Set(years)];
+};
+
 export default function RankAll() {
   const { ranks } = useRankings();
   const [key, setKey] = useState("2020");
+  const [years, setYears] = useState([]);
   const [rowData, setRowData] = useState([]);
   const [colDefs, setColDefs] = useState([
-    { field: "rank", headerName: "Happiness Rank" },
+    { field: "rank", maxWidth: 70 },
     {
       field: "country",
       cellRenderer: CellRenderer,
     },
+    { field: "score" },
+    { field: "economy" },
+    { field: "family" },
+    { field: "freedom" },
+    { field: "generosity" },
+    { field: "health" },
+    { field: "trust" },
   ]);
 
   const handleSelect = (k) => {
@@ -27,61 +41,31 @@ export default function RankAll() {
     if (ranks) {
       const filteredData = ranks.filter((rank) => rank.year == key);
       setRowData(filteredData);
+      setYears(yearList(ranks));
     }
   }, [ranks, key]);
 
   return (
     <div className="pt-5">
       <h1>All Countries By Year</h1>
-      <Tabs id="controlled-tab-example" activeKey={key} onSelect={handleSelect}>
-        <Tab
-          eventKey="2020"
-          title="2020"
-          className="mb-3 ag-theme-quartz"
-          style={{ height: 500 }}
-        >
-          <AgGridReact rowData={rowData} columnDefs={colDefs} />
-        </Tab>
-        <Tab
-          eventKey="2019"
-          title="2019"
-          className="mb-3 ag-theme-quartz"
-          style={{ height: 500 }}
-        >
-          <AgGridReact rowData={rowData} columnDefs={colDefs} />
-        </Tab>
-        <Tab
-          eventKey="2018"
-          title="2018"
-          className="mb-3 ag-theme-quartz"
-          style={{ height: 500 }}
-        >
-          <AgGridReact rowData={rowData} columnDefs={colDefs} />
-        </Tab>
-        <Tab
-          eventKey="2017"
-          title="2017"
-          className="mb-3 ag-theme-quartz"
-          style={{ height: 500 }}
-        >
-          <AgGridReact rowData={rowData} columnDefs={colDefs} />
-        </Tab>
-        <Tab
-          eventKey="2016"
-          title="2016"
-          className="mb-3 ag-theme-quartz"
-          style={{ height: 500 }}
-        >
-          <AgGridReact rowData={rowData} columnDefs={colDefs} />
-        </Tab>
-        <Tab
-          eventKey="2015"
-          title="2015"
-          className="mb-3 ag-theme-quartz"
-          style={{ height: 500 }}
-        >
-          <AgGridReact rowData={rowData} columnDefs={colDefs} />
-        </Tab>
+      <Tabs id="controlled-tab" activeKey={key} onSelect={handleSelect}>
+        {years.map((year) => (
+          <Tab
+            eventKey={year}
+            title={year}
+            className="mb-3 ag-theme-quartz"
+            style={{ height: 500 }}
+          >
+            <AgGridReact
+              rowData={rowData}
+              columnDefs={colDefs}
+              defaultColDef={{ sortable: true, resizable: true, flex: 1 }}
+              pagination={true}
+              paginationPageSize={20}
+              paginationPageSizeSelector={(20, 50, 100)}
+            />
+          </Tab>
+        ))}
       </Tabs>
     </div>
   );

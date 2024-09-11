@@ -1,3 +1,7 @@
 .hero {
   height: 100vh;
 }
+
+.link-underline:hover {
+  cursor: pointer;
+}

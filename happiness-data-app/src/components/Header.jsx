@@ -59,22 +59,22 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
                 Factors
               </HighlightLink>
               {!isLoggedIn ? (
-                <HighlightLink
-                  to="/login"
-                  as={Link}
-                  onClick={() => setExpanded(false)}
-                >
-                  Login
-                </HighlightLink>
-              ) : null}
-              {!isLoggedIn ? (
-                <HighlightLink
-                  to="/register"
-                  as={Link}
-                  onClick={() => setExpanded(false)}
-                >
-                  Register
-                </HighlightLink>
+                <>
+                  <HighlightLink
+                    to="/login"
+                    as={Link}
+                    onClick={() => setExpanded(false)}
+                  >
+                    Login
+                  </HighlightLink>
+                  <HighlightLink
+                    to="/register"
+                    as={Link}
+                    onClick={() => setExpanded(false)}
+                  >
+                    Register
+                  </HighlightLink>
+                </>
               ) : null}
               {isLoggedIn ? (
                 <HighlightLink

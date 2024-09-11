@@ -28,6 +28,7 @@ export default function App() {
             </Route>
             <Route path="year/:year" element={<RankYear />} />
           </Route>
+          <Route path="/factors" element={<Factors />}></Route>
           <Route
             path="/login"
             element={<Login setIsLoggedIn={setIsLoggedIn} />}

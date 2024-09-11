@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import "../index.css";
 
 export default function CellRenderer(props) {
   const navigate = useNavigate();
@@ -20,11 +21,17 @@ export default function CellRenderer(props) {
   };
 
   return (
-    <button
+    <a
       onClick={handleClick}
-      className="btn btn-outline-primary w-100 h-100"
+      className="link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
     >
       {props.value}
-    </button>
+    </a>
+    // <button
+    //   onClick={handleClick}
+    //   className="btn btn-outline-primary w-100 h-100"
+    // >
+    //   {props.value}
+    // </button>
   );
 }
