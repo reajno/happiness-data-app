@@ -4,7 +4,8 @@ import { AgGridReact } from "ag-grid-react";
 
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import useRankings from "../api";
+import CellRenderer from "../components/CellRenderer";
+import useRankings from "../useRankings";
 
 export default function RankAll() {
   const { ranks } = useRankings();
@@ -12,8 +13,10 @@ export default function RankAll() {
   const [rowData, setRowData] = useState([]);
   const [colDefs, setColDefs] = useState([
     { field: "rank", headerName: "Happiness Rank" },
-    { field: "country" },
-    // { field: "year" },
+    {
+      field: "country",
+      cellRenderer: CellRenderer,
+    },
   ]);
 
   const handleSelect = (k) => {

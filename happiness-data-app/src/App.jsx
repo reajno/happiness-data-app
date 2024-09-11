@@ -3,12 +3,12 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 // import "./App.css";
 import Header from "./components/Header";
 import Home from "./Home";
-import RankAll from "./components/RankAll";
-import RankCountry from "./components/RankCountry";
+import RankAll from "./Rankings/RankAll";
+import RankCountry from "./Rankings/RankCountry";
+import RankYear from "./Rankings/RankYear";
 import Login from "./User/Login";
 import Register from "./User/Register";
 import Factors from "./Factors";
-// import Rankings from "./Rankings";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -23,7 +23,10 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/rankings">
             <Route index element={<RankAll />} />
-            <Route path=":id" element={<RankCountry />} />
+            <Route path="country/:id" element={<RankCountry />}>
+              <Route path="year/:year" element={<RankCountry />} />
+            </Route>
+            <Route path="year/:year" element={<RankYear />} />
           </Route>
           <Route
             path="/login"

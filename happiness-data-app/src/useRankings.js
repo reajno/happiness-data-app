@@ -11,13 +11,18 @@ const getData = (year, country) => {
 
   const apiUrl = `${baseUrl}?${params.toString()}`;
 
-  //   console.log(params.toString());
-
   return fetch(apiUrl, {
     headers: {
       "X-API-KEY": `${API_KEY}`,
     },
   }).then((res) => res.json());
+};
+
+const errorCountryNotFound = (country) => {
+  return {
+    error: true,
+    message: `Invalid country format. "${country}" is not a country`,
+  };
 };
 
 export default function useRankings(year, country) {
@@ -28,8 +33,21 @@ export default function useRankings(year, country) {
   useEffect(() => {
     setLoading(true);
     getData(year, country)
-      .then((data) => setRanks(data))
-      .catch((error) => setError(error))
+      .then((data) => {
+        if (data.length === 0) {
+          throw errorCountryNotFound(country);
+        }
+        if (data.error) {
+          setError(data);
+          throw data;
+        }
+
+        setRanks(data);
+      })
+      .catch((error) => {
+        console.error(error.message);
+        setError(error);
+      })
       .finally(() => {
         setLoading(false);
       });

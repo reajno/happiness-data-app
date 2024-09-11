@@ -4,11 +4,11 @@ import { AgGridReact } from "ag-grid-react";
 
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import useRankings from "../api";
+import useRankings from "../useRankings";
 
 export default function RankCountry() {
   const { id } = useParams();
-  const { ranks } = useRankings(null, id);
+  const { loading, ranks, error } = useRankings(null, id.replace(/-/g, " "));
   const [country, setCountry] = useState("");
   const [rowData, setRowData] = useState([]);
   const [colDefs, setColDefs] = useState([
@@ -25,7 +25,12 @@ export default function RankCountry() {
 
   return (
     <div className="pt-5">
-      <h1>{country} - Rank By Year</h1>
+      {loading ? (
+        <h1> LOADING...</h1>
+      ) : (
+        <h1>{error ? `${error.message}` : `${country} - Rank By Year`}</h1>
+      )}
+
       <div className="ag-theme-quartz" style={{ height: 500 }}>
         <AgGridReact rowData={rowData} columnDefs={colDefs} />
       </div>
