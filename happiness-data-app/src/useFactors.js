@@ -50,6 +50,11 @@ export default function useFactors(year) {
     setLoading(true);
     getFactors(year)
       .then((data) => {
+        if (data.error) {
+          setError(data);
+          throw new Error(data.message);
+          // HANDLE JWT TOKEN EXPIRED ETC
+        }
         setAverage(factorsAverage(data, year));
         setFactors(data);
       })

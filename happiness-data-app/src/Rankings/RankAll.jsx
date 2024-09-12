@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Tab, Tabs } from "react-bootstrap";
+import { Tab, Tabs, Row, Col } from "react-bootstrap";
 import { AgGridReact } from "ag-grid-react";
 
 import "ag-grid-community/styles/ag-grid.css";
@@ -25,12 +25,6 @@ export default function RankAll() {
       cellRenderer: CellRenderer,
     },
     { field: "score" },
-    { field: "economy" },
-    { field: "family" },
-    { field: "freedom" },
-    { field: "generosity" },
-    { field: "health" },
-    { field: "trust" },
   ]);
 
   const handleSelect = (k) => {
@@ -46,27 +40,45 @@ export default function RankAll() {
   }, [ranks, key]);
 
   return (
-    <div className="pt-5">
-      <h1>All Countries By Year</h1>
-      <Tabs id="controlled-tab" activeKey={key} onSelect={handleSelect}>
-        {years.map((year) => (
-          <Tab
-            eventKey={year}
-            title={year}
-            className="mb-3 ag-theme-quartz"
-            style={{ height: 500 }}
+    <div className="container">
+      <Row className="vh-100 d-flex align-items-center pt-5">
+        <Col className=" d-flex flex-column align-items-center p-0">
+          <h1 className="fw-bold mb-2">All Countries By Year</h1>
+          <h2 className="fs-6 mb-4  text-center">
+            Select the year using the tabs below. <br />
+            Click a country name for more information.
+          </h2>
+          <Tabs
+            activeKey={key}
+            onSelect={handleSelect}
+            className="fw-bold fs-5 justify-content-center"
           >
-            <AgGridReact
-              rowData={rowData}
-              columnDefs={colDefs}
-              defaultColDef={{ sortable: true, resizable: true, flex: 1 }}
-              pagination={true}
-              paginationPageSize={20}
-              paginationPageSizeSelector={(20, 50, 100)}
-            />
-          </Tab>
-        ))}
-      </Tabs>
+            {years.map((year) => (
+              <Tab
+                key={year}
+                eventKey={year}
+                title={year}
+                className="mb-3 ag-theme-quartz"
+                style={{ height: 500 }}
+              >
+                <AgGridReact
+                  rowData={rowData}
+                  columnDefs={colDefs}
+                  defaultColDef={{
+                    sortable: true,
+                    resizable: true,
+                    flex: 1,
+                    minWidth: 100,
+                  }}
+                  pagination={true}
+                  paginationPageSize={20}
+                  paginationPageSizeSelector={(20, 50, 100)}
+                />
+              </Tab>
+            ))}
+          </Tabs>
+        </Col>
+      </Row>
     </div>
   );
 }

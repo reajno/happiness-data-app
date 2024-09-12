@@ -5,3 +5,30 @@
 .link-underline:hover {
   cursor: pointer;
 }
+
+.nav-margin {
+  margin-top: 3.5rem;
+}
+
+.tab-content,
+.ag-grid-container {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .tab-content {
+    width: revert;
+  }
+  .ag-grid-container {
+    width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .ag-paging-panel {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+  }
+}
