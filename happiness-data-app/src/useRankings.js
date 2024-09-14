@@ -31,6 +31,7 @@ export default function useRankings(year, country) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    setError(null);
     setLoading(true);
     getData(year, country)
       .then((data) => {
@@ -57,5 +58,6 @@ export default function useRankings(year, country) {
     loading: loading,
     ranks: ranks,
     error: error,
+    success: !loading && !error && ranks.length > 0,
   };
 }

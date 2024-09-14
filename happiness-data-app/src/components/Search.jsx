@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import useCountryList from "../useCountryList";
+import queryUtils from "../Utilities/utils";
 
 import TextInput from "react-autocomplete-input";
 import "react-autocomplete-input/dist/bundle.css";
 
-export default function SearchBar(props) {
+export default function SearchBar({ onClick, isLoggedIn }) {
   const { list } = useCountryList();
 
   const [allCountries, setAllCountries] = useState([]);
@@ -24,16 +25,22 @@ export default function SearchBar(props) {
   const handleSearch = (e) => {
     e.preventDefault();
 
-    const countryQuery = country.trim().toLowerCase().replace(/\s+/g, "-");
+    const countryQuery = queryUtils.toHyphen(country);
     const yearQuery = year ? year : null;
 
     let url = "/rankings";
     if (countryQuery && yearQuery) {
-      url = `/rankings/country/${countryQuery}/year/${yearQuery}`;
+      if (!isLoggedIn) {
+        console.log("hi");
+        url = `/rankings/country/${countryQuery}/`;
+      } else {
+        url = `/factors/${yearQuery}/${countryQuery}`;
+        // Set alert message to log in
+      }
     } else if (countryQuery) {
       url = `/rankings/country/${countryQuery}`;
     } else if (yearQuery) {
-      url = `/rankings/year/${yearQuery}`;
+      url = `/rankings/${yearQuery}`;
     }
 
     navigate(url);
@@ -68,7 +75,7 @@ export default function SearchBar(props) {
           <option value={2015}>2015</option>
         </Form.Select>
 
-        <Button variant="success" type="submit" {...props}>
+        <Button variant="success" type="submit" onClick={onClick}>
           Search
         </Button>
       </form>

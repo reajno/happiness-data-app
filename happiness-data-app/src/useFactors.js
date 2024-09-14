@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
-const API_URL = "https://d2h6rsg43otiqk.cloudfront.net/prod";
-const API_KEY = "EzensCqxyl63t09mVG6jr2AXriDQeimS95s4CdpV";
-
 const getFactors = (year) => {
+  const API_URL = "https://d2h6rsg43otiqk.cloudfront.net/prod";
+  const API_KEY = "EzensCqxyl63t09mVG6jr2AXriDQeimS95s4CdpV";
+
   const url = `${API_URL}/factors/${year}`;
   const token = localStorage.getItem("token");
 
@@ -14,9 +14,7 @@ const getFactors = (year) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  })
-    .then((res) => res.json())
-    .catch((error) => console.log(error));
+  }).then((res) => res.json());
 };
 
 const factorsAverage = (data, year) => {
@@ -40,6 +38,12 @@ const factorsAverage = (data, year) => {
   };
 };
 
+/* 
+Status 500 Error
+- Database/Server error (year doesnt exist)
+
+*/
+
 export default function useFactors(year) {
   const [loading, setLoading] = useState(true);
   const [factors, setFactors] = useState();
@@ -47,18 +51,19 @@ export default function useFactors(year) {
   const [average, setAverage] = useState({});
 
   useEffect(() => {
+    setError(null);
     setLoading(true);
     getFactors(year)
       .then((data) => {
         if (data.error) {
           setError(data);
-          throw new Error(data.message);
-          // HANDLE JWT TOKEN EXPIRED ETC
+          throw data;
         }
         setAverage(factorsAverage(data, year));
         setFactors(data);
       })
       .catch((error) => {
+        console.log(error);
         console.error(error.message);
         setError(error);
       })
@@ -72,5 +77,6 @@ export default function useFactors(year) {
     factors: factors,
     error: error,
     average: average,
+    success: !loading && !error && factors.length > 0,
   };
 }

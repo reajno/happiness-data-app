@@ -1,4 +1,4 @@
-import { Link, useResolvedPath, useMatch } from "react-router-dom";
+import { Link, useResolvedPath, useMatch, useLocation } from "react-router-dom";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import SearchBar from "./Search";
 
@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const HighlightLink = (props) => {
   let resolved = useResolvedPath(props.to);
-  let match = useMatch({ path: resolved.pathname, end: true });
+  let match = useMatch(`${resolved.pathname}/*`);
   return <Nav.Link {...props} active={match} />;
 };
 
@@ -78,7 +78,7 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
               ) : null}
               {isLoggedIn ? (
                 <HighlightLink
-                  to="/"
+                  to="/logout"
                   as={Link}
                   onClick={() => {
                     setExpanded(false);
@@ -89,7 +89,10 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
                 </HighlightLink>
               ) : null}
             </Nav>
-            <SearchBar onClick={() => setExpanded(false)} />
+            <SearchBar
+              onClick={() => setExpanded(false)}
+              isLoggedIn={isLoggedIn}
+            />
           </Navbar.Collapse>
         </Container>
       </Navbar>
