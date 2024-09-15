@@ -12,6 +12,9 @@ import queryUtils from "../Utilities/utils";
 import AlertModal from "../components/AlertModal";
 import useFactors from "../useFactors";
 import useCountryList from "../useCountryList";
+import GridTable from "../components/GridTable";
+import MainSection from "../components/MainSection";
+import GridYearTabs from "../components/GridYearTabs";
 
 const withAvgColor = (initCols, avgArr) => {
   return initCols.map((col) => {
@@ -28,14 +31,10 @@ const withAvgColor = (initCols, avgArr) => {
   });
 };
 
-const years = [2020, 2019, 2018, 2017, 2016, 2015];
-
 export default function RankFactors() {
   const navigate = useNavigate();
   const { year: paramYear, country: paramCountry } = useParams();
-  const [year, setYear] = useState(paramYear);
   const [allCountries, setAllCountries] = useState([]);
-  const [alertMessage, setAlertMessage] = useState(null);
   const [quickFilter, setQuickFilter] = useState(
     paramCountry ? queryUtils.toWhiteSpace(paramCountry) : ""
   );
@@ -53,29 +52,36 @@ export default function RankFactors() {
   ]);
 
   const { list } = useCountryList();
-  const { loading, factors, average, error, success } = useFactors(year);
+  const { loading, factors, average, error, success } = useFactors(paramYear);
 
   useEffect(() => {
-    if (error) {
-      setAlertMessage(error.message);
-    }
     if (success) {
       setAllCountries(list);
-      setYear(paramYear);
       const newColDefs = withAvgColor(colDefs, average);
       setColDefs(newColDefs);
       setRowData(factors);
     }
   }, [paramYear, factors, list]);
 
-  const handleSelect = (newYear) => {
+  const page = {
+    title: "Country Happiness Factors",
+    text: (
+      <>
+        Select the year using the tabs below. <br />
+        Use the search bar to filter countries or specific scores. <br />
+        Green cells indicate above average scores, while red signifies below
+        average scores.
+      </>
+    ),
+  };
+
+  const handleSelect = (paramYear) => {
     if (allCountries.includes(quickFilter.trim())) {
-      navigate(`/factors/${newYear}/${queryUtils.toHyphen(quickFilter)}`);
+      navigate(`/factors/${paramYear}/${queryUtils.toHyphen(quickFilter)}`);
     } else {
       setQuickFilter("");
-      navigate(`/factors/${newYear}`);
+      navigate(`/factors/${paramYear}`);
     }
-    setYear(newYear);
   };
 
   const handleFilterChange = (value) => {
@@ -83,72 +89,41 @@ export default function RankFactors() {
   };
 
   return (
-    <div className="container">
-      <Row className="vh-100 d-flex align-items-center pt-5">
-        <Col className=" d-flex flex-column align-items-center p-0">
-          {loading ? (
-            <h1> LOADING...</h1>
-          ) : error ? (
-            alertMessage && (
-              <AlertModal message={alertMessage} prevOnClose={true} />
-            )
-          ) : (
-            <>
-              <h1 className="fw-bold mb-2">Country Happiness Factors</h1>
-              <h2 className="fs-6 mb-4 text-center">
-                Select the year using the tabs below. <br />
-                Use the search bar to filter countries or specific scores.
-                <br />
-                Green cells indicate above average scores, while red signifies
-                below average scores.
-              </h2>
-
-              <TextInput
-                options={allCountries}
-                Component={"input"}
-                trigger={""}
-                matchAny={true}
-                className="me-2 form-control w-50 mb-5"
-                placeholder="Quick Filter"
-                aria-label="Search table"
-                type="text"
-                value={quickFilter}
-                onChange={handleFilterChange}
-              />
-              <Tabs
-                activeKey={year}
-                onSelect={handleSelect}
-                className="fw-bold fs-5 justify-content-center"
-              >
-                {years.map((year) => (
-                  <Tab
-                    key={year}
-                    eventKey={year}
-                    title={year}
-                    className="mb-3 ag-theme-quartz"
-                    style={{ height: 500 }}
-                  >
-                    <AgGridReact
-                      rowData={rowData}
-                      columnDefs={colDefs}
-                      defaultColDef={{
-                        sortable: true,
-                        resizable: true,
-                        flex: 1,
-                        minWidth: 100,
-                      }}
-                      pagination={true}
-                      paginationPageSize={20}
-                      paginationPageSizeSelector={(20, 50, 100)}
-                      quickFilterText={quickFilter}
-                    />
-                  </Tab>
-                ))}
-              </Tabs>
-            </>
-          )}
-        </Col>
-      </Row>
-    </div>
+    <MainSection error={error} pageTitle={page.title} pageText={page.text}>
+      <GridYearTabs activeKey={paramYear} onSelect={handleSelect}>
+        <GridTable
+          rowData={rowData}
+          colDefs={colDefs}
+          loading={loading}
+          error={error}
+          quickFilterText={quickFilter}
+        />
+      </GridYearTabs>
+      <TextInput
+        options={allCountries}
+        Component={"input"}
+        trigger={""}
+        matchAny={true}
+        className="me-2 form-control w-50 "
+        placeholder="Quick Filter"
+        aria-label="Search table"
+        type="text"
+        value={quickFilter}
+        onChange={handleFilterChange}
+      />
+    </MainSection>
   );
+  // return (
+  //             <TextInput
+  //               options={allCountries}
+  //               Component={"input"}
+  //               trigger={""}
+  //               matchAny={true}
+  //               className="me-2 form-control w-50 mb-5"
+  //               placeholder="Quick Filter"
+  //               aria-label="Search table"
+  //               type="text"
+  //               value={quickFilter}
+  //               onChange={handleFilterChange}
+  //             />
 }

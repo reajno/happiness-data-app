@@ -24,7 +24,7 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
         expand="lg"
         bg="primary"
         variant="dark"
-        className="fixed-top"
+        className="fixed-top p-3"
         expanded={expanded}
       >
         <Container fluid>
@@ -49,7 +49,7 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
                 as={Link}
                 onClick={() => setExpanded(false)}
               >
-                Country Rankings
+                Rankings
               </HighlightLink>
               <HighlightLink
                 to="/factors"

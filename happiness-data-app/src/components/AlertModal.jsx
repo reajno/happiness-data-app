@@ -1,7 +1,13 @@
 import { Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-export default function AlertModal({ message, prevOnClose, onClose }) {
+export default function AlertModal({
+  variant = "danger",
+  message,
+  prevOnClose,
+  onClose,
+  dismissible = true,
+}) {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -12,9 +18,10 @@ export default function AlertModal({ message, prevOnClose, onClose }) {
     <>
       {message && (
         <Alert
-          variant="danger"
+          className="w-100 text-center"
+          variant={variant}
           onClose={prevOnClose ? handleGoBack : onClose}
-          dismissible
+          dismissible={dismissible}
         >
           {message}
         </Alert>

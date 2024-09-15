@@ -38,12 +38,6 @@ const factorsAverage = (data, year) => {
   };
 };
 
-/* 
-Status 500 Error
-- Database/Server error (year doesnt exist)
-
-*/
-
 export default function useFactors(year) {
   const [loading, setLoading] = useState(true);
   const [factors, setFactors] = useState();
@@ -58,12 +52,12 @@ export default function useFactors(year) {
         if (data.error) {
           setError(data);
           throw data;
+        } else {
+          setAverage(factorsAverage(data, year));
+          setFactors(data);
         }
-        setAverage(factorsAverage(data, year));
-        setFactors(data);
       })
       .catch((error) => {
-        console.log(error);
         console.error(error.message);
         setError(error);
       })

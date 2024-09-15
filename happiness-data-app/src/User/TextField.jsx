@@ -11,7 +11,7 @@ export default function TextField({
 }) {
   let id = `input${text}`;
   return (
-    <Col md={size}>
+    <Col md={size} className="px-0">
       <Form.Label htmlFor={id} column="sm-2">
         {text}
       </Form.Label>
