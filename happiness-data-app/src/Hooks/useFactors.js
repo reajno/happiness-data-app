@@ -32,8 +32,8 @@ const factorsAverage = (yearFactors, year) => {
 
   const averages = {};
 
-// For each key in the result for factor totals, the key found in 'averages' object 
-// should equal to each key with the total divided by total number of factors  
+  // For each key in the result for factor totals, the key found in 'averages' object
+  // should equal to each key with the total divided by total number of factors
   Object.keys(total).forEach((key) => {
     averages[key] = (total[key] / yearFactors.length).toFixed(3);
   });

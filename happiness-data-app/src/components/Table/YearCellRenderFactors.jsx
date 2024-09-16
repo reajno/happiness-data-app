@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import queryUtils from "../../Utilities/utils";
-import "../index.css";
 
 export default function YearCellRenderFactors({
   value,
@@ -13,12 +12,12 @@ export default function YearCellRenderFactors({
   const errorRestrictedAccess = () => {
     return {
       error: true,
-      message: 
+      message: (
         <span>
-          You must <a href="/login">Log In</a> or <a href="/register">Register</a>{" "}
-          to view this content.
+          You must <a href="/login">Log In</a> or{" "}
+          <a href="/register">Register</a> to view this content.
         </span>
-  
+      ),
     };
   };
 
@@ -32,7 +31,6 @@ export default function YearCellRenderFactors({
         navigate(url);
       }
     } catch (error) {
-      // if (onError) 
       onError(error);
     }
   };

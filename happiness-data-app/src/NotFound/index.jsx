@@ -1,12 +1,13 @@
-import {useRouterError} from 'react-router-dom';
+import MainSection from "../components/MainSection";
 
-export default function NotFound() {
-    const error = useRouterError()
-    console.error(error);
-    
-    return (
-        <div>
-            <h1>404 PAGE NOT FOUND</h1>
-        </div>
-    )
+export default function NotFound({
+  message,
+  pageTitle = "404 PAGE NOT FOUND",
+  children,
+}) {
+  return (
+    <MainSection pageTitle={pageTitle} pageText={message}>
+      {children}
+    </MainSection>
+  );
 }

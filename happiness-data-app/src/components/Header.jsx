@@ -1,4 +1,4 @@
-import { Link, useResolvedPath, useMatch, useLocation } from "react-router-dom";
+import { Link, useResolvedPath, useMatch } from "react-router-dom";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import SearchBar from "./Search";
 
@@ -65,7 +65,7 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
                     as={Link}
                     onClick={() => setExpanded(false)}
                   >
-                    Login
+                    Log In
                   </HighlightLink>
                   <HighlightLink
                     to="/register"

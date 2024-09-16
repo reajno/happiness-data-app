@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import queryUtils from "../../Utilities/utils";
-import "../index.css";
+// import "../index.css";
 
 export default function CountryCellRenderYears({ value }) {
   const navigate = useNavigate();

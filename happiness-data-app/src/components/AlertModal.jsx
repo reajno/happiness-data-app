@@ -7,6 +7,7 @@ export default function AlertModal({
   prevOnClose,
   onClose,
   dismissible = true,
+  className,
 }) {
   const navigate = useNavigate();
 
@@ -18,7 +19,7 @@ export default function AlertModal({
     <>
       {message && (
         <Alert
-          className="w-100 text-center"
+          className={`w-100 text-center ${className}`}
           variant={variant}
           onClose={prevOnClose ? handleGoBack : onClose}
           dismissible={dismissible}

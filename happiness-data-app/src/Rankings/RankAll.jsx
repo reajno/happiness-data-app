@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 
 import CountryCellRenderYears from "../components/Table/CountryCellRenderYears";
 import useRankings from "../Hooks/useRankings";
@@ -7,6 +8,7 @@ import useRankings from "../Hooks/useRankings";
 import MainSection from "../components/MainSection";
 import GridTable from "../components/Table/GridTable";
 import GridYearTabs from "../components/Table/GridYearTabs";
+import NotFound from "../NotFound";
 
 export default function RankAll() {
   const navigate = useNavigate();
@@ -45,15 +47,26 @@ export default function RankAll() {
   };
 
   return (
-    <MainSection error={error} pageTitle={page.title} pageText={page.text}>
-      <GridYearTabs activeKey={paramYear} onSelect={handleSelect}>
-        <GridTable
-          rowData={rowData}
-          colDefs={colDefs}
-          loading={loading}
-          error={error}
-        />
-      </GridYearTabs>
-    </MainSection>
+    <>
+      {loading ? (
+        <MainSection>
+          <Spinner animation="border" role="status" />
+        </MainSection>
+      ) : error ? (
+        <NotFound message={error.message} />
+      ) : (
+        <MainSection error={error} pageTitle={page.title} pageText={page.text}>
+          <GridYearTabs activeKey={paramYear} onSelect={handleSelect}>
+            <GridTable
+              className={"px-3 px-md-5"}
+              rowData={rowData}
+              colDefs={colDefs}
+              // loading={loading}
+              // error={error}
+            />
+          </GridYearTabs>
+        </MainSection>
+      )}
+    </>
   );
 }

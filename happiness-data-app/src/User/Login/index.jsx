@@ -18,11 +18,11 @@ export default function Login({ setIsLoggedIn }) {
     if (error) {
       setAlertMessage(error.message);
     }
-
     if (isLoggedIn) {
-      navigate({ pathname: "/factors/2015" });
+      setIsLoggedIn(true);
+      navigate({ pathname: "/factors" });
     }
-  }, [error, isLoggedIn]);
+  }, [error, isLoggedIn, setIsLoggedIn]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -37,11 +37,6 @@ export default function Login({ setIsLoggedIn }) {
             <h1 className="fw-bold mb-4">Log In</h1>
 
             <Form>
-              {error
-                ? alertMessage && (
-                    <AlertModal message={alertMessage} dismissible={false} />
-                  )
-                : null}
               <Row className=" p-2">
                 <TextField
                   size={12}
@@ -67,6 +62,12 @@ export default function Login({ setIsLoggedIn }) {
                   Login
                 </Button>
               </Row>
+
+              {error
+                ? alertMessage && (
+                    <AlertModal message={alertMessage} dismissible={false} />
+                  )
+                : null}
             </Form>
           </Col>
         </Row>

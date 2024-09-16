@@ -18,7 +18,7 @@ export default function Register() {
     }
 
     if (successMessage) {
-      setAlertMessage(`${successMessage}, please Login`);
+      setAlertMessage(`${successMessage}, please Log In`);
     }
   }, [error, successMessage]);
 
@@ -35,11 +35,6 @@ export default function Register() {
             <h1 className="fw-bold mb-4">Register</h1>
 
             <Form>
-              {error
-                ? alertMessage && (
-                    <AlertModal message={alertMessage} dismissible={false} />
-                  )
-                : null}
               {successMessage
                 ? alertMessage && (
                     <AlertModal
@@ -65,7 +60,7 @@ export default function Register() {
                 />
                 <Button
                   className={`mt-4 btn py-2 ${
-                    loading ? "btn-secondary" : "btn-success"
+                    loading ? "btn-secondary" : "btn-primary"
                   }`}
                   onClick={handleRegister}
                   disabled={loading}
@@ -73,6 +68,11 @@ export default function Register() {
                   Register
                 </Button>
               </Row>
+              {error
+                ? alertMessage && (
+                    <AlertModal message={alertMessage} dismissible={false} />
+                  )
+                : null}
             </Form>
           </Col>
         </Row>

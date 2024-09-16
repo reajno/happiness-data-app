@@ -10,7 +10,7 @@ import Register from "./User/Register";
 import RankAll from "./Rankings/RankAll";
 import RankCountry from "./Rankings/RankCountry";
 import RankFactors from "./Rankings/RankFactors";
-import NotFound from './NotFound/index'
+import NotFound from "./NotFound/index";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -19,10 +19,11 @@ export default function App() {
 
   return (
     <>
-      <BrowserRouter errorElement={<NotFound/>}>
+      <BrowserRouter>
         <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
           <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
+
           <Route path="/rankings">
             <Route index element={<Navigate to="/rankings/2020" replace />} />
             <Route path=":year" element={<RankAll />} />
@@ -43,6 +44,7 @@ export default function App() {
             element={<Login setIsLoggedIn={setIsLoggedIn} />}
           />
           <Route path="/register" element={<Register />} />
+          <Route path="/logout" element={<Navigate to="/" replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

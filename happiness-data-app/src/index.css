@@ -19,6 +19,10 @@
   .ag-grid-container {
     width: 50%;
   }
+
+  .w-md-50 {
+    width: 50% !important;
+  }
 }
 
 @media (max-width: 600px) {
