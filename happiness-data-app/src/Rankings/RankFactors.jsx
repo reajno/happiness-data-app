@@ -12,7 +12,6 @@ import MainSection from "../components/MainSection";
 import GridYearTabs from "../components/Table/GridYearTabs";
 import GridTable from "../components/Table/GridTable";
 import NotFound from "../NotFound";
-import AlertModal from "../components/AlertModal";
 
 export default function RankFactors() {
   const navigate = useNavigate();
@@ -106,7 +105,6 @@ export default function RankFactors() {
               className={"px-3 px-md-5"}
               rowData={rowData}
               colDefs={colDefs}
-              // loading={loading}
               error={error}
               quickFilterText={quickFilter}
             />
