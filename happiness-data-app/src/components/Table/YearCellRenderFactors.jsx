@@ -1,18 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import queryUtils from "../Utilities/utils";
+import queryUtils from "../../Utilities/utils";
 import "../index.css";
-
-const errorRestrictedAccess = () => {
-  return {
-    error: true,
-    message: 
-      <span>
-        You must <a href="/login">Log In</a> or <a href="/register">Register</a>{" "}
-        to view this content.
-      </span>
-
-  };
-};
 
 export default function YearCellRenderFactors({
   value,
@@ -21,6 +9,18 @@ export default function YearCellRenderFactors({
   onError,
 }) {
   const navigate = useNavigate();
+
+  const errorRestrictedAccess = () => {
+    return {
+      error: true,
+      message: 
+        <span>
+          You must <a href="/login">Log In</a> or <a href="/register">Register</a>{" "}
+          to view this content.
+        </span>
+  
+    };
+  };
 
   const handleClick = () => {
     try {
@@ -32,7 +32,8 @@ export default function YearCellRenderFactors({
         navigate(url);
       }
     } catch (error) {
-      if (onError) onError(error);
+      // if (onError) 
+      onError(error);
     }
   };
 

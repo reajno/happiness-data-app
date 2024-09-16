@@ -4,7 +4,7 @@ import { Row, Col, Container, Button, Form } from "react-bootstrap";
 
 import TextField from "../TextField";
 import AlertModal from "../../components/AlertModal";
-import useAuthenticate from "../../useAuthenticate";
+import useAuthenticate from "../../Hooks/useAuthenticate";
 
 export default function Login({ setIsLoggedIn }) {
   const [email, setEmail] = useState("");

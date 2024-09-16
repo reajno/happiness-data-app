@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const attemptAuthenticate = (type, email, password) => {
   const API_KEY = "EzensCqxyl63t09mVG6jr2AXriDQeimS95s4CdpV";

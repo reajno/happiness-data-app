@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import CountryCellRenderYears from "../components/CountryCellRenderYears";
-import useRankings from "../useRankings";
+import CountryCellRenderYears from "../components/Table/CountryCellRenderYears";
+import useRankings from "../Hooks/useRankings";
 
 import MainSection from "../components/MainSection";
-import GridTable from "../components/GridTable";
-import GridYearTabs from "../components/GridYearTabs";
+import GridTable from "../components/Table/GridTable";
+import GridYearTabs from "../components/Table/GridYearTabs";
 
 export default function RankAll() {
   const navigate = useNavigate();

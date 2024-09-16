@@ -1,35 +1,17 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { AgGridReact } from "ag-grid-react";
-import { Tab, Tabs, Row, Col } from "react-bootstrap";
-import "ag-grid-community/styles/ag-grid.css";
-import "ag-grid-community/styles/ag-theme-quartz.css";
 
 import TextInput from "react-autocomplete-input";
 import "react-autocomplete-input/dist/bundle.css";
 
 import queryUtils from "../Utilities/utils";
-import AlertModal from "../components/AlertModal";
-import useFactors from "../useFactors";
-import useCountryList from "../useCountryList";
-import GridTable from "../components/GridTable";
+import useFactors from "../Hooks/useFactors";
+import useCountryList from "../Hooks/useCountryList";
 import MainSection from "../components/MainSection";
-import GridYearTabs from "../components/GridYearTabs";
+import GridYearTabs from "../components/Table/GridYearTabs";
+import GridTable from "../components/Table/GridTable";
 
-const withAvgColor = (initCols, avgArr) => {
-  return initCols.map((col) => {
-    if (avgArr.hasOwnProperty(col.field)) {
-      return {
-        ...col,
-        cellStyle: (params) => ({
-          backgroundColor:
-            params.value > avgArr[col.field] ? "#b7e4c7" : "#f8d7da",
-        }),
-      };
-    }
-    return col;
-  });
-};
+
 
 export default function RankFactors() {
   const navigate = useNavigate();
@@ -54,10 +36,25 @@ export default function RankFactors() {
   const { list } = useCountryList();
   const { loading, factors, average, error, success } = useFactors(paramYear);
 
+  const highLowAverageColor = (initColDefs, factorsAvg) => {
+    return initColDefs.map((col) => {
+      if (factorsAvg.hasOwnProperty(col.field)) {
+        return {
+          ...col,
+          cellStyle: (params) => ({
+            backgroundColor:
+              params.value > factorsAvg[col.field] ? "#b7e4c7" : "#f8d7da",
+          }),
+        };
+      }
+      return col;
+    });
+  };
+
   useEffect(() => {
     if (success) {
       setAllCountries(list);
-      const newColDefs = withAvgColor(colDefs, average);
+      const newColDefs = highLowAverageColor(colDefs, average);
       setColDefs(newColDefs);
       setRowData(factors);
     }
@@ -113,17 +110,4 @@ export default function RankFactors() {
       />
     </MainSection>
   );
-  // return (
-  //             <TextInput
-  //               options={allCountries}
-  //               Component={"input"}
-  //               trigger={""}
-  //               matchAny={true}
-  //               className="me-2 form-control w-50 mb-5"
-  //               placeholder="Quick Filter"
-  //               aria-label="Search table"
-  //               type="text"
-  //               value={quickFilter}
-  //               onChange={handleFilterChange}
-  //             />
 }

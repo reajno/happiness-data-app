@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import TextField from "../TextField";
-import useAuthenticate from "../../useAuthenticate";
+import useAuthenticate from "../../Hooks/useAuthenticate";
 import AlertModal from "../../components/AlertModal";
 
 export default function Register() {
