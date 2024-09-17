@@ -73,7 +73,10 @@ export default function RankFactors() {
   }, [paramYear, factors, list]);
 
   const handleSelect = (paramYear) => {
-    if (allCountries.includes(quickFilter.trim())) {
+    const lowerCaseFilter = quickFilter.trim().toLowerCase();
+    if (
+      allCountries.some((country) => country.toLowerCase() === lowerCaseFilter)
+    ) {
       navigate(`/factors/${paramYear}/${queryUtils.toHyphen(quickFilter)}`);
     } else {
       setQuickFilter("");
@@ -98,8 +101,10 @@ export default function RankFactors() {
             <a href="/register">Register</a> to view this content.
           </span>
         </NotFound>
+      ) : error ? (
+        <NotFound message={error.message} />
       ) : (
-        <MainSection error={error} pageTitle={page.title} pageText={page.text}>
+        <MainSection pageTitle={page.title} pageText={page.text}>
           <GridYearTabs activeKey={paramYear} onSelect={handleSelect}>
             <GridTable
               className={"px-3 px-md-5"}

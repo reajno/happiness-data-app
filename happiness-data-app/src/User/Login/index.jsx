@@ -32,76 +32,38 @@ export default function Login({ setIsLoggedIn }) {
 
   return (
     <>
-    <MainSection pageTitle={'Log In'} error={alertMessage}>
-            <Form>
-              <Row className=" p-2">
-                <TextField
-                  size={12}
-                  text="Email"
-                  type="email"
-                  onChange={setEmail}
-                  value={email}
-                />
-                <TextField
-                  size={12}
-                  text="Password"
-                  type="password"
-                  onChange={setPassword}
-                  value={password}
-                />
-                <Button
-                  className={`mt-4 btn py-2 ${
-                    loading ? "btn-secondary" : "btn-success"
-                  }`}
-                  onClick={handleLogin}
-                  disabled={loading}
-                >
-                  Log In
-                </Button>
-              </Row>
-            </Form>
-    </MainSection>
-      {/* <Container>
-        <Row className="vh-100 d-flex align-items-center pt-5">
-          <Col className="d-flex flex-column align-items-center p-3">
-            <h1 className="fw-bold mb-4">Log In</h1>
-
-            <Form>
-              <Row className=" p-2">
-                <TextField
-                  size={12}
-                  text="Email"
-                  type="email"
-                  onChange={setEmail}
-                  value={email}
-                />
-                <TextField
-                  size={12}
-                  text="Password"
-                  type="password"
-                  onChange={setPassword}
-                  value={password}
-                />
-                <Button
-                  className={`mt-4 btn py-2 ${
-                    loading ? "btn-secondary" : "btn-success"
-                  }`}
-                  onClick={handleLogin}
-                  disabled={loading}
-                >
-                  Login
-                </Button>
-              </Row>
-
-              {error
-                ? alertMessage && (
-                    <AlertModal message={alertMessage} dismissible={false} />
-                  )
-                : null}
-            </Form>
-          </Col>
-        </Row>
-      </Container> */}
+      <MainSection pageTitle={"Log In"}>
+        <Form>
+          {alertMessage && (
+            <AlertModal message={alertMessage} dismissible={false} />
+          )}
+          <Row className="p-2">
+            <TextField
+              size={12}
+              text="Email"
+              type="email"
+              onChange={setEmail}
+              value={email}
+            />
+            <TextField
+              size={12}
+              text="Password"
+              type="password"
+              onChange={setPassword}
+              value={password}
+            />
+            <Button
+              className={`mt-4 btn py-2 ${
+                loading ? "btn-secondary" : "btn-success"
+              }`}
+              onClick={handleLogin}
+              disabled={loading}
+            >
+              Log In
+            </Button>
+          </Row>
+        </Form>
+      </MainSection>
     </>
   );
 }

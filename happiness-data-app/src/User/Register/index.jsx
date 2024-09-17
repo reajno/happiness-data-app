@@ -14,12 +14,15 @@ export default function Register() {
     useAuthenticate("register");
 
   useEffect(() => {
+    setAlertMessage("");
     if (error) {
       setAlertMessage(error.message);
-    }
-
-    if (successMessage) {
-      setAlertMessage(`${successMessage}, please Log In`);
+    } else if (successMessage) {
+      setAlertMessage(
+        <>
+          {successMessage}, please <a href="/login">Log In</a>
+        </>
+      );
     }
   }, [error, successMessage]);
 
@@ -30,43 +33,41 @@ export default function Register() {
 
   return (
     <>
-<MainSection pageTitle={'Register'} error={error && alertMessage ? alertMessage : null}> 
-          <Form>
-              {successMessage
-                ? alertMessage && (
-                    <AlertModal
-                      variant="success"
-                      message={alertMessage}
-                      dismissible={false}
-                    />
-                  )
-                : null}
-              <Row className="p-2">
-                <TextField
-                  size={12}
-                  text="Email"
-                  type="email"
-                  onChange={setEmail}
-                  value={email}
-                />
-                <TextField
-                  text="Password"
-                  type="password"
-                  onChange={setPassword}
-                  value={password}
-                />
-                <Button
-                  className={`mt-4 btn py-2 ${
-                    loading ? "btn-secondary" : "btn-primary"
-                  }`}
-                  onClick={handleRegister}
-                  disabled={loading}
-                >
-                  Register
-                </Button>
-              </Row>
-            </Form>
-</MainSection>
+      <MainSection pageTitle={"Register"}>
+        <Form>
+          {alertMessage && (
+            <AlertModal
+              variant={error ? "danger" : "success"}
+              message={alertMessage}
+              dismissible={false}
+            />
+          )}
+          <Row className="p-2">
+            <TextField
+              size={12}
+              text="Email"
+              type="email"
+              onChange={setEmail}
+              value={email}
+            />
+            <TextField
+              text="Password"
+              type="password"
+              onChange={setPassword}
+              value={password}
+            />
+            <Button
+              className={`mt-4 btn py-2 ${
+                loading ? "btn-secondary" : "btn-primary"
+              }`}
+              onClick={handleRegister}
+              disabled={loading}
+            >
+              Register
+            </Button>
+          </Row>
+        </Form>
+      </MainSection>
 
       {/* <Container>
         <Row className="vh-100 d-flex align-items-center pt-5">

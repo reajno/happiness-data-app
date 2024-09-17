@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import queryUtils from "../../Utilities/utils";
 
-export default function CountryCellRenderYears({ country }) {
+export default function CountryCellRenderYears({ value }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    const countryQuery = queryUtils.toHyphen(country);
+    const countryQuery = queryUtils.toHyphen(value);
     const url = `/rankings/country/${countryQuery}`;
     navigate(url);
   };

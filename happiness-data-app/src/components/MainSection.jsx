@@ -11,18 +11,18 @@ export default function MainSection({
   return (
     <div className="container">
       <Row className="vh-100 d-flex align-items-center pt-5">
-        <Col className=" d-flex flex-column align-items-center p-0">
+        <Col className=" d-flex flex-column align-items-center p-3">
           {error ? (
             <>
               <h1 className="fw-bold mb-2">{pageTitle}</h1>
               <h2 className="fs-6 mb-4  text-center">{pageText}</h2>
-              {children}
               <AlertModal
                 className={`mt-2 ${className}`}
                 message={error.message}
                 prevOnClose={false}
                 dismissible={false}
               />
+              {children}
             </>
           ) : (
             <>

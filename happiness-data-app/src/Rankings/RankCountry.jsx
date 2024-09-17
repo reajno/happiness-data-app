@@ -51,10 +51,8 @@ export default function RankCountry({ isLoggedIn }) {
       <>
         Compare this country's happiness ranking between 2015 to 2020.
         <br />
-        Select year below to see the factors that contributed to the rank.
-        <br />
-        <br />
-        (You must be logged into your account!)
+        Logged in users can select a year below to see the rank's contributing
+        factors.
       </>
     ),
   };

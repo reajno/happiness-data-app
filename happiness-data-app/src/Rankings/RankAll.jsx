@@ -33,7 +33,9 @@ export default function RankAll() {
     { field: "rank", maxWidth: 70 },
     {
       field: "country",
-      cellRenderer: (params) => <CountryCellRenderYears value={params.country} />,
+      cellRenderer: (params) => (
+        <CountryCellRenderYears value={params.value} />
+      ),
     },
     { field: "score" },
   ]);
