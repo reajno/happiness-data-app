@@ -12,6 +12,17 @@ import GridYearTabs from "../components/Table/GridYearTabs";
 import NotFound from "../NotFound";
 import TextInput from "react-autocomplete-input";
 
+const page = {
+  title: "All Countries By Year",
+  text: (
+    <>
+      Select the year using the tabs below.
+      {<br />}
+      Click a country name for more information.
+    </>
+  ),
+};
+
 export default function RankAll() {
   const navigate = useNavigate();
   const { year: paramYear } = useParams();
@@ -22,7 +33,7 @@ export default function RankAll() {
     { field: "rank", maxWidth: 70 },
     {
       field: "country",
-      cellRenderer: (params) => <CountryCellRenderYears value={params.value} />,
+      cellRenderer: (params) => <CountryCellRenderYears value={params.country} />,
     },
     { field: "score" },
   ]);
@@ -36,17 +47,6 @@ export default function RankAll() {
       setAllCountries(list);
     }
   }, [paramYear, success, error]);
-
-  const page = {
-    title: "All Countries By Year",
-    text: (
-      <>
-        Select the year using the tabs below.
-        {<br />}
-        Click a country name for more information.
-      </>
-    ),
-  };
 
   const handleSelect = (paramYear) => {
     navigate(`/rankings/${paramYear}`);

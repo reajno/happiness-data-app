@@ -13,6 +13,33 @@ import GridYearTabs from "../components/Table/GridYearTabs";
 import GridTable from "../components/Table/GridTable";
 import NotFound from "../NotFound";
 
+const page = {
+  title: "Country Happiness Factors",
+  text: (
+    <>
+      Select the year using the tabs below. <br />
+      Use the search bar to filter countries or specific scores. <br />
+      Green cells indicate above average scores, while red signifies below
+      average scores.
+    </>
+  ),
+};
+
+const colsAvgColor = (initColDefs, factorsAvg) => {
+  return initColDefs.map((col) => {
+    if (factorsAvg.hasOwnProperty(col.field)) {
+      return {
+        ...col,
+        cellStyle: (params) => ({
+          backgroundColor:
+            params.value > factorsAvg[col.field] ? "#b7e4c7" : "#f8d7da",
+        }),
+      };
+    }
+    return col;
+  });
+};
+
 export default function RankFactors() {
   const navigate = useNavigate();
   const { year: paramYear, country: paramCountry } = useParams();
@@ -36,41 +63,14 @@ export default function RankFactors() {
   const { list } = useCountryList();
   const { loading, factors, average, error, success } = useFactors(paramYear);
 
-  const highLowAverageColor = (initColDefs, factorsAvg) => {
-    return initColDefs.map((col) => {
-      if (factorsAvg.hasOwnProperty(col.field)) {
-        return {
-          ...col,
-          cellStyle: (params) => ({
-            backgroundColor:
-              params.value > factorsAvg[col.field] ? "#b7e4c7" : "#f8d7da",
-          }),
-        };
-      }
-      return col;
-    });
-  };
-
   useEffect(() => {
     if (success) {
       setAllCountries(list);
-      const newColDefs = highLowAverageColor(colDefs, average);
+      const newColDefs = colsAvgColor(colDefs, average);
       setColDefs(newColDefs);
       setRowData(factors);
     }
   }, [paramYear, factors, list]);
-
-  const page = {
-    title: "Country Happiness Factors",
-    text: (
-      <>
-        Select the year using the tabs below. <br />
-        Use the search bar to filter countries or specific scores. <br />
-        Green cells indicate above average scores, while red signifies below
-        average scores.
-      </>
-    ),
-  };
 
   const handleSelect = (paramYear) => {
     if (allCountries.includes(quickFilter.trim())) {

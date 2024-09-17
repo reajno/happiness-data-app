@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import TextField from "../TextField";
 import useAuthenticate from "../../Hooks/useAuthenticate";
 import AlertModal from "../../components/AlertModal";
+import MainSection from "../../components/MainSection";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -29,7 +30,45 @@ export default function Register() {
 
   return (
     <>
-      <Container>
+<MainSection pageTitle={'Register'} error={error && alertMessage ? alertMessage : null}> 
+          <Form>
+              {successMessage
+                ? alertMessage && (
+                    <AlertModal
+                      variant="success"
+                      message={alertMessage}
+                      dismissible={false}
+                    />
+                  )
+                : null}
+              <Row className="p-2">
+                <TextField
+                  size={12}
+                  text="Email"
+                  type="email"
+                  onChange={setEmail}
+                  value={email}
+                />
+                <TextField
+                  text="Password"
+                  type="password"
+                  onChange={setPassword}
+                  value={password}
+                />
+                <Button
+                  className={`mt-4 btn py-2 ${
+                    loading ? "btn-secondary" : "btn-primary"
+                  }`}
+                  onClick={handleRegister}
+                  disabled={loading}
+                >
+                  Register
+                </Button>
+              </Row>
+            </Form>
+</MainSection>
+
+      {/* <Container>
         <Row className="vh-100 d-flex align-items-center pt-5">
           <Col className=" d-flex flex-column align-items-center p-3">
             <h1 className="fw-bold mb-4">Register</h1>
@@ -76,48 +115,7 @@ export default function Register() {
             </Form>
           </Col>
         </Row>
-      </Container>
+      </Container> */}
     </>
-    // <Container fluid="lg" className="pt-2">
-    //   <main className="flex-grow-1">
-    //     <Row className="viewport-height-75 align-items-center">
-    //       <Col md={6} lg={7}>
-    //         <div style={{ width: "100%" }}>
-    //           <h1 className="mb-5">Register</h1>
-    //           {alertMessage ? (
-    //             <Alert variant={!error ? "success" : "danger"}>
-    //               {alertMessage}
-    //             </Alert>
-    //           ) : null}
-    //           <Form className=" mb-3">
-    //             <Row className="g-3">
-    //               <TextField
-    //                 text="Email"
-    //                 type="email"
-    //                 onChange={setEmail}
-    //                 value={email}
-    //               />
-    //               <TextField
-    //                 value={password}
-    //                 text="Password"
-    //                 type="password"
-    //                 onChange={setPassword}
-    //               />
-    //               <div className="col-12">
-    //                 <Button
-    //                   type="submit"
-    //                   variant="primary"
-    //                   onClick={handleRegister}
-    //                 >
-    //                   Register
-    //                 </Button>
-    //               </div>
-    //             </Row>
-    //           </Form>
-    //         </div>
-    //       </Col>
-    //     </Row>
-    //   </main>
-    // </Container>
   );
 }

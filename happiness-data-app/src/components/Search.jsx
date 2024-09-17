@@ -8,13 +8,11 @@ import TextInput from "react-autocomplete-input";
 import "react-autocomplete-input/dist/bundle.css";
 
 export default function SearchBar({ onClick, isLoggedIn }) {
-  const { list } = useCountryList();
-
+  const navigate = useNavigate();
   const [allCountries, setAllCountries] = useState([]);
   const [country, setCountry] = useState("");
-  const [year, setYear] = useState(null);
-
-  const navigate = useNavigate();
+  const [year, setYear] = useState(null);  
+  const { list } = useCountryList();
 
   useEffect(() => {
     if (list.length > 0) {
@@ -31,11 +29,9 @@ export default function SearchBar({ onClick, isLoggedIn }) {
     let url = "/rankings";
     if (countryQuery && yearQuery) {
       if (!isLoggedIn) {
-        console.log("hi");
         url = `/rankings/country/${countryQuery}/`;
       } else {
         url = `/factors/${yearQuery}/${countryQuery}`;
-        // Set alert message to log in
       }
     } else if (countryQuery) {
       url = `/rankings/country/${countryQuery}`;

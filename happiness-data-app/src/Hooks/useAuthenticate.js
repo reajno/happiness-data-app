@@ -33,7 +33,6 @@ export default function useAuthenticate(type) {
   const login = (email, password) => {
     setError(null);
     setLoading(true);
-
     attemptAuthenticate(type, email, password)
       .then((data) => {
         if (data.error) {
