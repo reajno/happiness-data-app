@@ -4,21 +4,13 @@ import { Button, Form } from "react-bootstrap";
 import useCountryList from "../Hooks/useCountryList";
 import queryUtils from "../Utilities/utils";
 
-import TextInput from "react-autocomplete-input";
+import QuickFilter from "./QuickFilter";
 import "react-autocomplete-input/dist/bundle.css";
 
 export default function SearchBar({ onClick, isLoggedIn }) {
   const navigate = useNavigate();
-  const [allCountries, setAllCountries] = useState([]);
   const [country, setCountry] = useState("");
-  const [year, setYear] = useState(null);  
-  const { list } = useCountryList();
-
-  useEffect(() => {
-    if (list.length > 0) {
-      setAllCountries(list);
-    }
-  }, [list]);
+  const [year, setYear] = useState(null);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -43,20 +35,17 @@ export default function SearchBar({ onClick, isLoggedIn }) {
     setCountry("");
   };
 
+  const handleFilterChange = (value) => {
+    setCountry(value);
+  };
+
   return (
     <div>
       <form className="d-flex" role="search" onSubmit={handleSearch}>
-        <TextInput
-          options={allCountries}
-          Component={"input"}
-          trigger={""}
-          matchAny={true}
-          className="me-2 form-control"
+        <QuickFilter
           placeholder="Search By Country"
-          aria-label="Search"
-          type="search"
           value={country}
-          onChange={(value) => setCountry(value)}
+          onChange={handleFilterChange}
         />
         <Form.Select
           className="w-50 me-2"

@@ -10,7 +10,7 @@ import MainSection from "../components/MainSection";
 import GridTable from "../components/Table/GridTable";
 import GridYearTabs from "../components/Table/GridYearTabs";
 import NotFound from "../NotFound";
-import TextInput from "react-autocomplete-input";
+import QuickFilter from "../components/QuickFilter";
 
 const page = {
   title: "All Countries By Year",
@@ -33,9 +33,7 @@ export default function RankAll() {
     { field: "rank", maxWidth: 70 },
     {
       field: "country",
-      cellRenderer: (params) => (
-        <CountryCellRenderYears value={params.value} />
-      ),
+      cellRenderer: (params) => <CountryCellRenderYears value={params.value} />,
     },
     { field: "score" },
   ]);
@@ -76,15 +74,9 @@ export default function RankAll() {
               quickFilterText={quickFilter}
             />
           </GridYearTabs>
-          <TextInput
-            options={allCountries}
-            Component={"input"}
-            trigger={""}
-            matchAny={true}
-            className="me-2 form-control w-50 "
-            placeholder="Quick Filter"
-            aria-label="Search table"
-            type="text"
+          <QuickFilter
+            isTableFilter={true}
+            placeholder="Filter Table..."
             value={quickFilter}
             onChange={handleFilterChange}
           />

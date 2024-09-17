@@ -1,4 +1,4 @@
-import { Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import AlertModal from "./AlertModal";
 
 export default function MainSection({
@@ -9,7 +9,7 @@ export default function MainSection({
   children,
 }) {
   return (
-    <div className="container">
+    <Container>
       <Row className="vh-100 d-flex align-items-center pt-5">
         <Col className=" d-flex flex-column align-items-center p-3">
           {error ? (
@@ -33,6 +33,6 @@ export default function MainSection({
           )}
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 }

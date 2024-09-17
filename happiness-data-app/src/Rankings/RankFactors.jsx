@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 
-import TextInput from "react-autocomplete-input";
 import "react-autocomplete-input/dist/bundle.css";
 
 import queryUtils from "../Utilities/utils";
@@ -12,6 +11,7 @@ import MainSection from "../components/MainSection";
 import GridYearTabs from "../components/Table/GridYearTabs";
 import GridTable from "../components/Table/GridTable";
 import NotFound from "../NotFound";
+import QuickFilter from "../components/QuickFilter";
 
 const page = {
   title: "Country Happiness Factors",
@@ -114,15 +114,9 @@ export default function RankFactors() {
               quickFilterText={quickFilter}
             />
           </GridYearTabs>
-          <TextInput
-            options={allCountries}
-            Component={"input"}
-            trigger={""}
-            matchAny={true}
-            className="me-2 form-control w-50 "
-            placeholder="Quick Filter"
-            aria-label="Search table"
-            type="text"
+          <QuickFilter
+            isTableFilter={true}
+            placeholder="Filter Table..."
             value={quickFilter}
             onChange={handleFilterChange}
           />
