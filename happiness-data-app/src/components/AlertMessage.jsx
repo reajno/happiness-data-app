@@ -1,17 +1,10 @@
 import { Alert } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 
 export default function AlertMessage({
   variant = "danger",
   message,
   className,
 }) {
-  const navigate = useNavigate();
-
-  const handleGoBack = () => {
-    navigate(-1);
-  };
-
   return (
     <>
       {message && (
