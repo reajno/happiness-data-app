@@ -19,6 +19,7 @@ export default function App() {
     <>
       <BrowserRouter>
         <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+
         <Routes>
           <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
 
@@ -46,9 +47,10 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           
           <Route path="/logout" element={<Navigate to="/" replace />} />
-          
+
           <Route path="*" element={<NotFound />} />
         </Routes>
+        
       </BrowserRouter>
     </>
   );

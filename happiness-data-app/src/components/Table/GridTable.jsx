@@ -1,7 +1,6 @@
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import CustomTableOverlay from "./CustomTableOverlay";
 
 export default function GridTable({
   rowData,
@@ -25,10 +24,6 @@ export default function GridTable({
       pagination={pagination}
       paginationPageSize={20}
       paginationPageSizeSelector={(20, 50, 100)}
-      noRowsOverlayComponent={CustomTableOverlay}
-      noRowsOverlayComponentParams={{
-        message: loading ? "LOADING..." : error ? error.message : null,
-      }}
     />
   );
 }

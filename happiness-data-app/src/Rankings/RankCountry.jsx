@@ -7,6 +7,7 @@ import GridTable from "../components/Table/GridTable";
 import MainSection from "../components/MainSection";
 import NotFound from "../NotFound";
 import { Spinner } from "react-bootstrap";
+import AlertMessage from "../components/AlertMessage";
 
 export default function RankCountry({ isLoggedIn }) {
   const { country: paramCountry } = useParams();

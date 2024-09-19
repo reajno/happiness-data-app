@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
-import AlertModal from "./AlertModal";
+import AlertMessage from "./AlertMessage";
 
 export default function MainSection({
   error,
@@ -16,7 +16,7 @@ export default function MainSection({
             <>
               <h1 className="fw-bold mb-2">{pageTitle}</h1>
               <h2 className="fs-6 mb-4  text-center">{pageText}</h2>
-              <AlertModal
+              <AlertMessage
                 className={`mt-2 ${className}`}
                 message={error.message}
                 prevOnClose={false}

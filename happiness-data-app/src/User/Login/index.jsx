@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Row, Col, Container, Button, Form } from "react-bootstrap";
+import { Row, Button, Form } from "react-bootstrap";
 
 import TextField from "../TextField";
-import AlertModal from "../../components/AlertModal";
+import AlertMessage from "../../components/AlertMessage";
 import useAuthenticate from "../../Hooks/useAuthenticate";
 import MainSection from "../../components/MainSection";
 
@@ -34,9 +34,7 @@ export default function Login({ setIsLoggedIn }) {
     <>
       <MainSection pageTitle={"Log In"}>
         <Form>
-          {alertMessage && (
-            <AlertModal message={alertMessage} dismissible={false} />
-          )}
+          {alertMessage && <AlertMessage message={alertMessage} />}
           <Row className="p-2">
             <TextField
               size={12}

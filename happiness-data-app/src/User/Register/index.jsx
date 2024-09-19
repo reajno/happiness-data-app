@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Row, Form, Button } from "react-bootstrap";
 import TextField from "../TextField";
 import useAuthenticate from "../../Hooks/useAuthenticate";
-import AlertModal from "../../components/AlertModal";
+import AlertMessage from "../../components/AlertMessage";
 import MainSection from "../../components/MainSection";
 
 export default function Register() {
@@ -36,10 +36,9 @@ export default function Register() {
       <MainSection pageTitle={"Register"}>
         <Form>
           {alertMessage && (
-            <AlertModal
+            <AlertMessage
               variant={error ? "danger" : "success"}
               message={alertMessage}
-              dismissible={false}
             />
           )}
           <Row className="p-2">
@@ -68,55 +67,6 @@ export default function Register() {
           </Row>
         </Form>
       </MainSection>
-
-      {/* <Container>
-        <Row className="vh-100 d-flex align-items-center pt-5">
-          <Col className=" d-flex flex-column align-items-center p-3">
-            <h1 className="fw-bold mb-4">Register</h1>
-
-            <Form>
-              {successMessage
-                ? alertMessage && (
-                    <AlertModal
-                      variant="success"
-                      message={alertMessage}
-                      dismissible={false}
-                    />
-                  )
-                : null}
-              <Row className="p-2">
-                <TextField
-                  size={12}
-                  text="Email"
-                  type="email"
-                  onChange={setEmail}
-                  value={email}
-                />
-                <TextField
-                  text="Password"
-                  type="password"
-                  onChange={setPassword}
-                  value={password}
-                />
-                <Button
-                  className={`mt-4 btn py-2 ${
-                    loading ? "btn-secondary" : "btn-primary"
-                  }`}
-                  onClick={handleRegister}
-                  disabled={loading}
-                >
-                  Register
-                </Button>
-              </Row>
-              {error
-                ? alertMessage && (
-                    <AlertModal message={alertMessage} dismissible={false} />
-                  )
-                : null}
-            </Form>
-          </Col>
-        </Row>
-      </Container> */}
     </>
   );
 }
