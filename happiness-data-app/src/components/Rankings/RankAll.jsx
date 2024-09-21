@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 
-import useRankings from "../Hooks/useRankings";
-import CountryCellRenderYears from "../components/Table/CountryCellRenderYears";
-import MainSection from "../components/MainSection";
-import GridTable from "../components/Table/GridTable";
-import GridYearTabs from "../components/Table/GridYearTabs";
-import NotFound from "../NotFound";
-import QuickFilter from "../components/QuickFilter";
+import useRankings from "../../Hooks/useRankings";
+import CountryCellRenderYears from "../Table/CountryCellRenderYears";
+import MainSection from "../MainSection";
+import GridTable from "../Table/GridTable";
+import GridYearTabs from "../Table/GridYearTabs";
+import NotFound from "../../NotFound";
+import QuickFilter from "../QuickFilter";
 
 const page = {
   title: "All Countries By Year",

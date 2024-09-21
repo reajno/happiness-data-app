@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
-import SearchBar from "../components/Search";
+import SearchBar from "../Components/Search";
 
 export default function Home({ isLoggedIn }) {
   return (

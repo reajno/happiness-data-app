@@ -1,4 +1,4 @@
-import MainSection from "../components/MainSection";
+import MainSection from "../Components/MainSection";
 
 export default function NotFound({
   message,

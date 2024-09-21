@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Row, Form, Button } from "react-bootstrap";
 import TextField from "../TextField";
 import useAuthenticate from "../../Hooks/useAuthenticate";
-import AlertMessage from "../../components/AlertMessage";
-import MainSection from "../../components/MainSection";
+import AlertMessage from "../../Components/AlertMessage";
+import MainSection from "../../Components/MainSection";
 
 export default function Register() {
   const [email, setEmail] = useState("");

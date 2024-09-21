@@ -19,9 +19,6 @@ const getFactors = (year) => {
 
 const factorsAverage = (yearFactors, year) => {
   const total = yearFactors.reduce((acc, country) => {
-    // For the keys of each country, if key has factors value (e.g. not rank or country name).
-    // Add the key to the accumulator object. It's initial value is zero and add the value of the same key found in the next country.
-    // Return accumulator obj which has the sum of each factor key.
     Object.keys(country).forEach((key) => {
       if (key !== "rank" && key !== "country") {
         acc[key] = (acc[key] || 0) + parseFloat(country[key]);
@@ -32,8 +29,6 @@ const factorsAverage = (yearFactors, year) => {
 
   const averages = {};
 
-  // For each key in the result for factor totals, the key found in 'averages' object
-  // should equal to each key with the total divided by total number of factors
   Object.keys(total).forEach((key) => {
     averages[key] = (total[key] / yearFactors.length).toFixed(3);
   });

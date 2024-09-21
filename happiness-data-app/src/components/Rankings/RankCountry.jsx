@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 
-import YearCellRenderFactors from "../components/Table/YearCellRenderFactors";
-import useRankings from "../Hooks/useRankings";
-import queryUtils from "../Utilities/utils";
-import GridTable from "../components/Table/GridTable";
-import MainSection from "../components/MainSection";
-import NotFound from "../NotFound";
+import YearCellRenderFactors from "../Table/YearCellRenderFactors";
+import useRankings from "../../Hooks/useRankings";
+import queryUtils from "../../Utilities/utils";
+import GridTable from "../Table/GridTable";
+import MainSection from "../MainSection";
+import NotFound from "../../NotFound";
 
 export default function RankCountry({ isLoggedIn }) {
   const { country: paramCountry } = useParams();
