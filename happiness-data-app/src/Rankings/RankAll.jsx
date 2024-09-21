@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 
-import CountryCellRenderYears from "../components/Table/CountryCellRenderYears";
 import useRankings from "../Hooks/useRankings";
-import useCountryList from "../Hooks/useCountryList";
-
+import CountryCellRenderYears from "../components/Table/CountryCellRenderYears";
 import MainSection from "../components/MainSection";
 import GridTable from "../components/Table/GridTable";
 import GridYearTabs from "../components/Table/GridYearTabs";
@@ -26,7 +24,6 @@ const page = {
 export default function RankAll() {
   const navigate = useNavigate();
   const { year: paramYear } = useParams();
-  const [allCountries, setAllCountries] = useState([]);
   const [quickFilter, setQuickFilter] = useState("");
   const [rowData, setRowData] = useState([]);
   const [colDefs, setColDefs] = useState([
@@ -38,13 +35,11 @@ export default function RankAll() {
     { field: "score" },
   ]);
 
-  const { list } = useCountryList();
   const { loading, ranks, error, success } = useRankings(paramYear);
 
   useEffect(() => {
     if (success) {
       setRowData(ranks);
-      setAllCountries(list);
     }
   }, [paramYear, success, error]);
 
