@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useResolvedPath, useMatch } from "react-router-dom";
 import { Container, Navbar, Nav } from "react-bootstrap";
+
 import SearchBar from "./Search";
 
 const HighlightLink = (props) => {

@@ -1,6 +1,8 @@
-import TextInput from "react-autocomplete-input";
-import useCountryList from "../Hooks/useCountryList";
 import { Container } from "react-bootstrap";
+
+import useCountryList from "../Hooks/useCountryList";
+import TextInput from "react-autocomplete-input";
+import "react-autocomplete-input/dist/bundle.css";
 
 export default function QuickFilter({
   placeholder,

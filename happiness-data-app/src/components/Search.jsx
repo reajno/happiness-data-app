@@ -1,11 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
-import useCountryList from "../Hooks/useCountryList";
-import queryUtils from "../Utilities/utils";
 
+import queryUtils from "../Utilities/utils";
 import QuickFilter from "./QuickFilter";
-import "react-autocomplete-input/dist/bundle.css";
 
 export default function SearchBar({ onClick, isLoggedIn }) {
   const navigate = useNavigate();

@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 
-import "react-autocomplete-input/dist/bundle.css";
-
 import queryUtils from "../Utilities/utils";
 import useFactors from "../Hooks/useFactors";
 import useCountryList from "../Hooks/useCountryList";
@@ -43,7 +41,6 @@ const colsAvgColor = (initColDefs, factorsAvg) => {
 export default function RankFactors() {
   const navigate = useNavigate();
   const { year: paramYear, country: paramCountry } = useParams();
-  const [allCountries, setAllCountries] = useState([]);
   const [quickFilter, setQuickFilter] = useState(
     paramCountry ? queryUtils.toWhiteSpace(paramCountry) : ""
   );
@@ -60,28 +57,18 @@ export default function RankFactors() {
     { field: "score" },
   ]);
 
-  const { list } = useCountryList();
   const { loading, factors, average, error, success } = useFactors(paramYear);
 
   useEffect(() => {
     if (success) {
-      setAllCountries(list);
       const newColDefs = colsAvgColor(colDefs, average);
       setColDefs(newColDefs);
       setRowData(factors);
     }
-  }, [paramYear, factors, list]);
+  }, [success, factors]);
 
   const handleSelect = (paramYear) => {
-    const lowerCaseFilter = quickFilter.trim().toLowerCase();
-    if (
-      allCountries.some((country) => country.toLowerCase() === lowerCaseFilter)
-    ) {
-      navigate(`/factors/${paramYear}/${queryUtils.toHyphen(quickFilter)}`);
-    } else {
-      setQuickFilter("");
-      navigate(`/factors/${paramYear}`);
-    }
+    navigate(`/factors/${paramYear}/${queryUtils.toHyphen(quickFilter)}`);
   };
 
   const handleFilterChange = (value) => {
