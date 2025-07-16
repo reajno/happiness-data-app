@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 
 import queryUtils from "../Utilities/utils";
-import QuickFilter from "../Components/QuickFilter";
+import QuickFilter from "../components/QuickFilter";
 
 export default function SearchBar({ onClick, isLoggedIn }) {
   const navigate = useNavigate();

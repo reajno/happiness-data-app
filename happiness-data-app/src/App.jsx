@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import Header from "./Components/Header";
+import Header from "./components/Header";
 import Home from "./Home";
 import Login from "./User/Login";
 import Register from "./User/Register";
-import RankAll from "./Components/Rankings/RankAll";
-import RankCountry from "./Components/Rankings/RankCountry";
-import RankFactors from "./Components/Rankings/RankFactors";
+import RankAll from "./components/Rankings/RankAll";
+import RankCountry from "./components/Rankings/RankCountry";
+import RankFactors from "./components/Rankings/RankFactors";
 import NotFound from "./NotFound/index";
 
 export default function App() {

@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Row, Button, Form } from "react-bootstrap";
 
 import TextField from "../TextField";
-import AlertMessage from "../../Components/AlertMessage";
+import AlertMessage from "../../components/AlertMessage";
 import useAuthenticate from "../../Hooks/useAuthenticate";
-import MainSection from "../../Components/MainSection";
+import MainSection from "../../components/MainSection";
 
 export default function Login({ setIsLoggedIn }) {
   const [email, setEmail] = useState("");
