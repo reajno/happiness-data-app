@@ -1,23 +1,23 @@
 import { useState } from "react";
 
 const attemptAuthenticate = (type, email, password) => {
-  const API_KEY = "EzensCqxyl63t09mVG6jr2AXriDQeimS95s4CdpV";
-  const API_URL = "https://d2h6rsg43otiqk.cloudfront.net/prod/user";
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const apiUrl = `${import.meta.env.VITE_API_URL}/user`;
 
   let url = "";
 
   if (type === "login") {
-    url = `${API_URL}/login`;
+    url = `${apiUrl}/login`;
   }
 
   if (type === "register") {
-    url = `${API_URL}/register`;
+    url = `${apiUrl}/register`;
   }
 
   return fetch(url, {
     method: "POST",
     headers: {
-      "X-API-KEY": `${API_KEY}`,
+      "X-API-KEY": `${apiKey}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email: email, password: password }),

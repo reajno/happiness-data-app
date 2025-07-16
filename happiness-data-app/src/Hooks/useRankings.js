@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 
 const getData = (year, country) => {
-  const API_KEY = "EzensCqxyl63t09mVG6jr2AXriDQeimS95s4CdpV";
-  const baseUrl = "https://d2h6rsg43otiqk.cloudfront.net/prod/rankings";
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const apiUrl = `${import.meta.env.VITE_API_URL}/rankings`;
 
   const params = new URLSearchParams();
 
   if (year) params.append("year", year);
   if (country) params.append("country", country);
 
-  const apiUrl = `${baseUrl}?${params.toString()}`;
+  const url = `${apiUrl}?${params.toString()}`;
 
-  return fetch(apiUrl, {
+  return fetch(url, {
     headers: {
-      "X-API-KEY": `${API_KEY}`,
+      "X-API-KEY": `${apiKey}`,
     },
   }).then((res) => res.json());
 };

@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 
 const getFactors = (year) => {
-  const API_URL = "https://d2h6rsg43otiqk.cloudfront.net/prod";
-  const API_KEY = "EzensCqxyl63t09mVG6jr2AXriDQeimS95s4CdpV";
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const apiUrl = import.meta.env.VITE_API_URL;
 
-  const url = `${API_URL}/factors/${year}`;
+  const url = `${apiUrl}/factors/${year}`;
   const token = localStorage.getItem("token");
 
   return fetch(url, {
     method: "GET",
     headers: {
-      "X-API-KEY": `${API_KEY}`,
+      "X-API-KEY": `${apiKey}`,
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },

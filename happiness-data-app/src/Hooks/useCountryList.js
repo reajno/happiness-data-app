@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
 const getData = () => {
-  const API_KEY = "EzensCqxyl63t09mVG6jr2AXriDQeimS95s4CdpV";
-  const url = "https://d2h6rsg43otiqk.cloudfront.net/prod/countries";
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const apiUrl = `${import.meta.env.VITE_API_URL}/countries`;
 
-  return fetch(url, {
+  return fetch(apiUrl, {
     headers: {
-      "X-API-KEY": `${API_KEY}`,
+      "X-API-KEY": apiKey,
     },
   }).then((res) => res.json());
 };
